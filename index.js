@@ -87,6 +87,16 @@ async function run() {
       res.json(result);
     });
 
+    // put Admin
+
+    app.put("/users/admin", async (req, res) => {
+      const newAdmin = req.body;
+      const filter = { email: newAdmin.email };
+      const updateUser = { $set: { role: "Admin" } };
+      const result = await usersCollection.updateOne(filter, updateUser);
+      res.json(result);
+    });
+
     // DELETE a single product by ID
 
     app.delete("/notice/:id", async (req, res) => {
